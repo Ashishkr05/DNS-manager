@@ -23,7 +23,7 @@ const UploadJsonForm = ({ onClose }) => {
         const jsonContent = JSON.parse(event.target.result);
         const { name, type, value } = jsonContent;
   
-        const response = await axios.post('http://localhost:5000/dns-records', {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/dns-records`, {
           name,
           type,
           value

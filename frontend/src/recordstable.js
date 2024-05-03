@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './recordstable.css';
-import UpdateFormModal from './updateform'; // Corrected import path
+import UpdateFormModal from './updateform';
 
 const RecordsTable = ({ records, onDeleteRecord }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -8,7 +8,7 @@ const RecordsTable = ({ records, onDeleteRecord }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [recordToUpdate, setRecordToUpdate] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [searchQuery, setSearchQuery] = useState('');
 
   const recordsPerPage = 5;
 
@@ -30,7 +30,7 @@ const RecordsTable = ({ records, onDeleteRecord }) => {
     const { Name, Type, ResourceRecords } = record;
 
     try {
-      const response = await fetch(`http://localhost:5000/dns-records/${Name}/${Type}/${ResourceRecords[0].Value}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dns-records/${Name}/${Type}/${ResourceRecords[0].Value}`, {
         method: 'DELETE'
       });
 
@@ -70,7 +70,7 @@ const RecordsTable = ({ records, onDeleteRecord }) => {
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input" // Added class name for styling
+            className="search-input"
           />
         </div>
         {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}

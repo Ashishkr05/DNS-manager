@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   const fetchRecords = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/dns-records');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/dns-records`);
       setRecords(response.data);
     } catch (error) {
       console.error('Error fetching DNS records:', error);
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   const handleDeleteRecord = async (recordId) => {
     try {
-      await axios.delete(`http://localhost:5000/dns-records/${recordId}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/dns-records/${recordId}`);
       const updatedRecords = records.filter(record => record.id !== recordId);
       setRecords(updatedRecords);
       console.log('Record deleted successfully:', recordId);

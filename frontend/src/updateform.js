@@ -87,7 +87,7 @@ const UpdateFormModal = ({ recordToUpdate, onClose }) => {
         value: record.value
       };
 
-      const response = await axios.put(`http://localhost:5000/dns-records/${recordToUpdate.Name}`, filteredRecord);
+      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/dns-records/${recordToUpdate.Name}`, filteredRecord);
       setMessage(response.data.message);
       setSuccess(true);
 
