@@ -57,7 +57,7 @@ const RecordsTable = ({ records, onDeleteRecord }) => {
   };
 
   const navigateToDashboard = () => {
-    window.location.href = '/dashboard';
+    window.location.href = '';
   };
 
   return (
