@@ -6,6 +6,7 @@ import successIcon from './success-icon.png';
 const FormModal = ({ onClose }) => {
   const [record, setRecord] = useState({
     subdomain: '',
+    domain: '',
     type: '',
     value: ''
   });
@@ -66,21 +67,20 @@ const FormModal = ({ onClose }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      if (!record.subdomain) {
-        setMessage('Error: Subdomain is required');
+      if (!record.subdomain || !record.domain) {
+        setMessage('Error: Both subdomain and domain are required');
         setSuccess(false);
         return;
       }
-
       // Send a POST request to the backend server
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/dns-records`, {
-        ...record,
-        name: `${record.subdomain}.dnsmanager.com`
+        subdomain: record.subdomain,
+        domain: record.domain,
+        type: record.type,
+        value: record.value
       });
       setMessage(response.data.message);
-      setSuccess(true); // Set success to true upon successful record creation
-
-      // Reset success after 3000 milliseconds
+      setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
@@ -120,8 +120,16 @@ const FormModal = ({ onClose }) => {
               onChange={handleInputChange}
               required
             />
-            &nbsp;&nbsp;
-            .dnsmanager.com
+          </label>
+          <label>
+            Domain*
+            <input
+              type="text"
+              name="domain"
+              value={record.domain}
+              onChange={handleInputChange}
+              required
+            />
           </label>
           <label>
             Record Type*

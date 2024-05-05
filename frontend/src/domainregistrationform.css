@@ -1,0 +1,66 @@
+.registration-form-container {
+  position: relative;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.registration-form-container h2 {
+  margin-bottom: 10px;
+}
+
+.registration-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-form-container label {
+  margin-bottom: 10px;
+}
+
+.registration-form-container input,
+.registration-form-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.registration-form-container textarea {
+  height: 100px;
+}
+
+.registration-form-container .error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.registration-form-container .success-message { /* Style for success message */
+  color: green;
+  margin-top: 5px;
+}
+
+.registration-form-container button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.registration-form-container button:hover {
+  background-color: #0056b3;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
+
