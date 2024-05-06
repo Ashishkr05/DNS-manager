@@ -22,7 +22,6 @@ const route53 = new AWS.Route53({
 app.use(express.json());
 app.use(cors());
 
-
 const getHostedZoneId = async (domainName) => {
   const params = {
     DNSName: domainName,
@@ -42,20 +41,24 @@ const getHostedZoneId = async (domainName) => {
   }
 };
 
-// Create DNS record
 app.post('/dns-records', async (req, res) => {
   const { subdomain, domain, type, value } = req.body;
 
   try {
-    if (!subdomain || !domain) {
-      throw new Error('Subdomain and domain are required');
+    if (!domain) {
+      throw new Error('Domain is required');
     }
 
-    const domainName = `${subdomain}.${domain}`;
+    let domainName;
+    if (subdomain) {
+      domainName = `${subdomain}.${domain}`;
+    } else {
+      domainName = domain;
+    }
 
     // Get the hosted zone ID based on the domain name
     const hostedZoneId = await getHostedZoneId(domain);
-    
+
     // Proceed with creating the DNS record using the retrieved hosted zone ID
     const params = {
       HostedZoneId: hostedZoneId,
@@ -171,9 +174,14 @@ const getRecordsFromHostedZone = async (hostedZoneId) => {
 // Delete DNS record
 app.delete('/dns-records/:recordName/:recordType/:recordValue', async (req, res) => {
   const { recordName, recordType, recordValue } = req.params;
+  console.log(recordName);
+  const domainName = recordName.split('.')[1] + '.' + recordName.split('.')[2];
+  console.log(domainName);
+
+  const FIND_HOSTED_ZONE_ID = await getHostedZoneId(domainName);
 
   const params = {
-    HostedZoneId: HOSTED_ZONE_ID,
+    HostedZoneId: FIND_HOSTED_ZONE_ID,
     ChangeBatch: {
       Changes: [
         {

@@ -67,8 +67,8 @@ const FormModal = ({ onClose }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      if (!record.subdomain || !record.domain) {
-        setMessage('Error: Both subdomain and domain are required');
+      if (!record.domain) {
+        setMessage('Error: Domain is required');
         setSuccess(false);
         return;
       }
@@ -112,13 +112,12 @@ const FormModal = ({ onClose }) => {
         {!success && message && <p className={message.startsWith('Error') ? 'error-message' : ''}>{message}</p>}
         <form onSubmit={handleSubmit}>
           <label>
-            Subdomain*
+            Subdomain
             <input
               type="text"
               name="subdomain"
               value={record.subdomain}
               onChange={handleInputChange}
-              required
             />
           </label>
           <label>

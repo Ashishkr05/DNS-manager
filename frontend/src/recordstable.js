@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './recordstable.css';
 import UpdateFormModal from './updateform';
 
-const RecordsTable = ({ records, onDeleteRecord }) => {
+  const RecordsTable = ({ records, onDeleteRecord }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
