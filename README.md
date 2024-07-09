@@ -57,3 +57,6 @@ Develop a web application to provide a central dashboard for automating manageme
 2. Add and view DNS records.
 3. Utilize forms/modals for adding, editing, and deleting records.
 4. Use search options, pagination, and JSON file upload for efficient management.
+
+
+## link to hosted site: https://dns-manager-project-s64i.onrender.com/
